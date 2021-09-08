@@ -52,7 +52,7 @@ namespace Renomear_Arquivos
             // Valida se o diretório é valido
             if (textBox_diretorio.Text == "" || Path.IsPathRooted(textBox_diretorio.Text) == false)                       
             {
-                MessageBox.Show("c um diretório valido!");
+                MessageBox.Show("Escolha um diretório valido!");
                 return;
             }
                       
@@ -256,13 +256,13 @@ namespace Renomear_Arquivos
                 }
 
                 var aux1 = "Exite: 1 Arquivo!\nCom a quantidade de caracteres inferior ao selecionado(" + textBox_quant_remover_caracteres.Text + ")" +
-                    "\nSendo assim é impossível renomear um arquivo com menos de 1 caracter." +
+                    "\nSendo impossível renomear um arquivo com menos de 1 caracter." +
                     "\nEsse arquivo listado abaixo não será alterado!";
 
                 if (quant_caracter_inferior > 1)
                 {
                     aux1 = "Existem: " + quant_caracter_inferior + " Arquivos!\nCom a quantidade de caracteres inferior ao selecionado( " + textBox_quant_remover_caracteres.Text + " )" +
-                    "\nSendo assim é impossível renomear um arquivo com menos de 1 caracter." +
+                    "\nSendo impossível renomear um arquivo com menos de 1 caracter." +
                     "\nEsses arquivos listados abaixo não serão alterados!";
                 }
 
