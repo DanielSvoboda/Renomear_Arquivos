@@ -149,6 +149,7 @@
             // 
             // button_atualizar2
             // 
+            this.button_atualizar2.Enabled = false;
             this.button_atualizar2.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.button_atualizar2.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_atualizar2.Location = new System.Drawing.Point(143, 17);

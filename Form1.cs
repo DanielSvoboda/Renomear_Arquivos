@@ -15,17 +15,17 @@ namespace Renomear_Arquivos
 
         string nomes_originais; // variavel auxiliar apenas para ver no textbox o conteudo da var nomes_originais_lista
 
-        ArrayList nomes_originais_lista = new ArrayList();      //lista com nomes originais
-        ArrayList extensao_originais_lista = new ArrayList();   //lista extensoes originais
-        ArrayList nomes_mod_lista = new ArrayList();            //nome final 
+        ArrayList nomes_originais_lista = new ArrayList();       //lista com nomes originais
+        ArrayList extensoes_originais_lista = new ArrayList();   //lista extensoes originais
+        ArrayList nomes_modificados_lista = new ArrayList();     //nome final 
 
-        ArrayList nomes_com_caracteres_menor = new ArrayList(); //armazena nome dos arquivos que não seram alterados por ter a quantidade de caracteres inferior a quantidade solicitada que será removida.
-        
-        int quant_caracter_inferior = 0;
+        ArrayList nomes_nao_alterados_menores = new ArrayList(); //nome dos arquivos que não seram alterados por ter a quantidade de caracteres inferior a quantidade solicitada que será removida. 
+        int quantidade_nomes_nao_alterados = 0;
+
         int arquivos_com_mesmo_nome = 0;
 
 
-        //Escolher diretório
+        //Escolher diretório com: WindowsAPICodePack
         private void button_diretorio_Click(object sender, EventArgs e)
         {
             CommonOpenFileDialog dialog = new CommonOpenFileDialog();
@@ -35,10 +35,10 @@ namespace Renomear_Arquivos
                 textBox_diretorio.Text = dialog.FileName;
             }
 
-            // Se escolher um diretório e não selecionar um formaro, define: .PDF
+            // Se escolher um diretório e não selecionar uma extensão, define o formato como: .PDF
             if (comboBox_formatos.SelectedIndex == -1)      
             {
-                comboBox_formatos.SelectedIndex = comboBox_formatos.FindStringExact(".PDF");
+                comboBox_formatos.SelectedIndex = comboBox_formatos.FindStringExact(".PDF");    //ao selecionar o combobox, já executa o nomes_arquivos();
             }
             else
             {
@@ -47,10 +47,10 @@ namespace Renomear_Arquivos
         }
 
 
-        public void nomes_arquivos()
+        public void nomes_arquivos()        //Função que busca e armazena os nomes dos arquivos
         {
             // Valida se o diretório é valido
-            if (textBox_diretorio.Text == "" || Path.IsPathRooted(textBox_diretorio.Text) == false)                       
+            if (Path.IsPathRooted(textBox_diretorio.Text) == false)                       
             {
                 MessageBox.Show("Escolha um diretório valido!");
                 return;
@@ -59,8 +59,8 @@ namespace Renomear_Arquivos
             // Limpa as variaveis
             nomes_originais = "";
             nomes_originais_lista.Clear();
-            extensao_originais_lista.Clear();
-            nomes_mod_lista.Clear();
+            extensoes_originais_lista.Clear();
+            nomes_modificados_lista.Clear();
 
             DirectoryInfo directory = new DirectoryInfo(textBox_diretorio.Text);
             FileInfo[] files;
@@ -74,44 +74,44 @@ namespace Renomear_Arquivos
                 files = directory.GetFiles("*" + comboBox_formatos.Text);               //Se não, utilizara o conteudo selecionado do comboBox
             }
 
-            foreach (var file in files)     // repete ate o total de arquivo que existe na pasta, conforme a extensão
+            foreach (var file in files)     //Repete ate o total de arquivo que existe na pasta, conforme a extensão
             {
                 var name = file.Name.ToString();                                        //var aux com o nome
                 var exten = Path.GetExtension(directory.ToString() +"/"+ file);         //var aux com a extensão
 
                 nomes_originais += name + Environment.NewLine;                          //arquivo.txt       -apenas para usar no textbox
                 nomes_originais_lista.Add(name.Remove(name.Length - exten.Length));     //arquivo           -array
-                extensao_originais_lista.Add(exten);                                    //.txt              -array
+                extensoes_originais_lista.Add(exten);                                   //.txt              -array
             }
 
             if (nomes_originais != "")  //Se localizar algo add
             {
-                nomes_originais = nomes_originais.Remove(nomes_originais.Length - 1);   //Remove 2 ultimos caracteres, em branco        
+                nomes_originais = nomes_originais.Remove(nomes_originais.Length - 1);   //Remove o ultimos em branco...
                 textBox_nomes_originais.Text = nomes_originais;
             }
-            else                        //Se não localiar arquivos, informar:
+            else                        //Se não localizar arquivos, informar:
             {
                 if (comboBox_formatos.SelectedIndex == 12)
                 {
-                    MessageBox.Show("No local selecionado não contem arquivos com a extensão: " + textBox_outro_formato.Text);
+                    MessageBox.Show("No local selecionado não contem arquivos com a extensão:  " + textBox_outro_formato.Text);
                 }
                 else
                 {
-                    MessageBox.Show("No local selecionado não contem arquivos com a extensão: " + comboBox_formatos.Text);
+                    MessageBox.Show("No local selecionado não contem arquivos com a extensão:  " + comboBox_formatos.Text);
                 }
-                textBox_nomes_originais.Text = ""; // limpa o txtbox
+                textBox_nomes_originais.Text = ""; // limpa o txtBox
             }
         }
 
-        // BOTÃO ATUALIZAR- os nomes dos arquivos no diretório
+        // BOTÃO ATUALIZAR- nomes dos arquivos no diretório
         private void button_atualizar_Click(object sender, EventArgs e)
         {
             nomes_arquivos();
         }
 
-        //Habilita/Desabilita o textbox(extensão) e o botão de atualizar, se selecionar +MAIS no comboBox
+        //Ao escolher algo no comboBox        
         private void comboBox_formatos_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
+        {   //Habilita/Desabilita o textBox(extensão) e o botão de atualizar, se selecionar +MAIS no comboBox
             if (comboBox_formatos.SelectedIndex == 12)
             {
                 textBox_outro_formato.Enabled = true;
@@ -123,16 +123,17 @@ namespace Renomear_Arquivos
                 button_atualizar2.Enabled = false;
             }
 
-            if (textBox_diretorio.Text != "")
+            if (Path.IsPathRooted(textBox_diretorio.Text) == true)  //se escolher algo no comboBox e o diretorio for valido, visualizar os arquivos
             {
                 nomes_arquivos();
             }
         }
 
-        // botao remover
+        // Botao remover
         private void button1_Click(object sender, EventArgs e)
         {
-            // verifica se o campo textBox_quant_remover_caracteres é um numero e é acima de 0
+
+            // Verifica se o campo textBox_quant_remover_caracteres é um numero e é acima de 0
             bool isNumber = int.TryParse(textBox_quant_remover_caracteres.Text, out _);
             if (isNumber == false || Convert.ToInt32(textBox_quant_remover_caracteres.Text) <= 0)
             {
@@ -141,42 +142,41 @@ namespace Renomear_Arquivos
             }
             nomes_arquivos();
 
-            // Limpa as variaveis 
-            textBox_nomes_modificados.Text = "";  //LIMPA TELA DIREITA
-            nomes_mod_lista.Clear();
-            nomes_com_caracteres_menor.Clear();
-            quant_caracter_inferior = 0;
-            arquivos_com_mesmo_nome = 0;
-
             // Quantidade de caracteres que será removido no final do nome do arquivo
             int quant_remover = Convert.ToInt32(textBox_quant_remover_caracteres.Text);
 
+            // Limpa as variaveis 
+            textBox_nomes_modificados.Text = ""; 
+            nomes_modificados_lista.Clear();
+            nomes_nao_alterados_menores.Clear();
+            quantidade_nomes_nao_alterados = 0;
+            arquivos_com_mesmo_nome = 0;
 
             for (int i = 0; i < nomes_originais_lista.Count; i++)       // LOOP PELOS NOMES DA LISTA ORIGINAL
             {
-                string nome = nomes_originais_lista[i].ToString();      // VAR AUX:NOME QUE RECEBE O NOME DO ARQUIVO
+                string nome = nomes_originais_lista[i].ToString();      // VAR AUX QUE RECEBE O NOME DO ARQUIVO
 
                 if (nome.Length > quant_remover)    // Se o nome for maior que quantidade caracter a ser removido
                 {
-                    if (nomes_mod_lista.Count > 0)
+                    if (nomes_modificados_lista.Count > 0)
                     {
-                        //função verificar se o nome final ja existe(duplicado). E faz a correção add   _1   _2   _3
-                        var nome_final_renomeado = verificar_duplicado_1(nome.Remove(nome.Length - quant_remover), extensao_originais_lista[i].ToString(), 0);
+                            //função verificar se o nome final ja existe(duplicado). E faz a correção add   _1   _2   _3
+                        var nome_final_renomeado = verificar_duplicado_1(nome.Remove(nome.Length - quant_remover), extensoes_originais_lista[i].ToString(), 0); // verificar_duplicado_1(string nome, string extencao, int contar_repeticao)
 
-                        nomes_mod_lista.Add(nome_final_renomeado);
-                        textBox_nomes_modificados.Text += nomes_mod_lista[i ] + Environment.NewLine; //i-1...
+                        nomes_modificados_lista.Add(nome_final_renomeado);
+                        textBox_nomes_modificados.Text += nomes_modificados_lista[i] + Environment.NewLine; 
                     }
-                    else        //primeiro da lista, só add ele sem verificar nada, desdeq tenha o nome maios que 0 caracteres
+                    else    //Primeiro da lista, só add ele sem verificar nada, desde que tenha o nome maios que 0 caracteres
                     {
-                        nomes_mod_lista.Add(nome.Remove(nome.Length - quant_remover) + extensao_originais_lista[i]);
-                        textBox_nomes_modificados.Text += nomes_mod_lista[i ] + Environment.NewLine; //i-1 testar
+                        nomes_modificados_lista.Add(nome.Remove(nome.Length - quant_remover) + extensoes_originais_lista[i]);
+                        textBox_nomes_modificados.Text += nomes_modificados_lista[i] + Environment.NewLine;
                     }
                 }
-                else    //SE A QUANTIDADE DE CARACTERES QUE SERÁ REMOVIDO É MAIOR QUE O PROPRIO NOME DO ARQUIVO
+                else    //Se a quantidade de caracteres que será removido for maior que o proprio nome do arquivo
                 {
-                    quant_caracter_inferior += 1;
-                    nomes_com_caracteres_menor.Add(nomes_originais_lista[i].ToString() + extensao_originais_lista[i].ToString());
-                    nomes_mod_lista.Add(nomes_originais_lista[i].ToString() + extensao_originais_lista[i].ToString()); // O NOME FINAL VAI SER O MESMO, NAO ALTERAR. Menssagem posteriormente avisando
+                    quantidade_nomes_nao_alterados += 1;
+                    nomes_nao_alterados_menores.Add(nomes_originais_lista[i].ToString() + extensoes_originais_lista[i].ToString());
+                    nomes_modificados_lista.Add(nomes_originais_lista[i].ToString() + extensoes_originais_lista[i].ToString()); // O NOME FINAL VAI SER O MESMO, NAO ALTERAR. Menssagem posteriormente avisando
                 }
             }
 
@@ -185,72 +185,70 @@ namespace Renomear_Arquivos
 
             if (arquivos_com_mesmo_nome == 1)
             {
-                MessageBox.Show("1 arquivo tinha o nome final idêntico a outro, e esse\nfoi renomeado com um número no final:  _1");
+                MessageBox.Show("1 arquivo ficou com o nome idêntico a outro,\ne esse foi renomeado no final com:     _1");
             }
             if (arquivos_com_mesmo_nome > 1)
             {
-                MessageBox.Show(arquivos_com_mesmo_nome + " arquivos tinham o nome final idêntico a outro, e esses\nforam renomeados com uma numeração no final _1 _2 _3 ...");
+                MessageBox.Show(arquivos_com_mesmo_nome + " arquivos ficaram o nome idêntico a outro, e esses\nforam renomeados com uma numeração sequencial no final\nExemplo: ABC_1 ABC_2 ABC_3 . . .");
             }
         }
 
 
-
-        private string verificar_duplicado_1(string nome, string extencao, int contar_repeticao)
+        private string verificar_duplicado_1(string nome, string extensao, int contar_repeticao)
         {
-            var resultado = verificar_duplicado_2(nome, extencao, contar_repeticao);
+            var resultado = verificar_duplicado_2(nome, extensao, contar_repeticao);
             string novo_nome = resultado.nome;
-            string nova_extencao = resultado.extencao;
-            int contar = resultado.contar_repeticao;
+            string nova_extensao = resultado.extensao;
+            int novo_contar = resultado.contar_repeticao;
 
-            while (resultado.boleano == true)
+            while (resultado.boleano == true)        //se já existir um nome igual +1 contar
             {
                 arquivos_com_mesmo_nome += 1;
 
-                resultado = verificar_duplicado_2(novo_nome, nova_extencao, contar+1);
+                resultado = verificar_duplicado_2(novo_nome, nova_extensao, novo_contar+1);
                 novo_nome = resultado.nome;
-                nova_extencao = resultado.extencao;
-                contar = resultado.contar_repeticao;
+                nova_extensao = resultado.extensao;
+                novo_contar = resultado.contar_repeticao;
             }
-            if (contar == 0)
+            if (novo_contar == 0)
             {
-                return nome + extencao;
+                return nome + extensao;
             }
             else
             {
-                return nome + "_" + contar + extencao;
+                return nome + "_" + novo_contar + extensao;
             }
         }
 
-        private (bool boleano, string nome, string extencao, int contar_repeticao) verificar_duplicado_2(string nome, string extencao, int contar_repeticao)
+        private (bool boleano, string nome, string extensao, int contar_repeticao) verificar_duplicado_2(string nome, string extensao, int contar_repeticao)
         {
-            for (int j = 0; j < nomes_mod_lista.Count; j++)
+            for (int j = 0; j < nomes_modificados_lista.Count; j++)
             {
                 if (contar_repeticao == 0)
                 {
-                    if (nome+extencao == nomes_mod_lista[j].ToString())
+                    if (nome+extensao == nomes_modificados_lista[j].ToString()) //1° vez verificar: nome.extensao           arquivo.txt
                     {
-                        return (true,nome, extencao, contar_repeticao);
+                        return (true,nome, extensao, contar_repeticao);
                     }     
                 }
-                else
+                else                                                            //+ de 1 verificar: nome_nun.extensao       arquivo_1.txt
                 {
-                    if (nome +'_'+ contar_repeticao + extencao == nomes_mod_lista[j].ToString())
+                    if (nome +'_'+ contar_repeticao + extensao == nomes_modificados_lista[j].ToString())
                     {
-                        return (true, nome, extencao, contar_repeticao);
+                        return (true, nome, extensao, contar_repeticao);
                     }
                 }
             }
-            return (false, nome, extencao, contar_repeticao);
+            return (false, nome, extensao, contar_repeticao);
         }
-
 
 
         private void verificar_nao_modificados() //Verificar se a quantidade de caractes não ficará negativa ou =0
         {
             string mensagem_dialog = string.Empty;
-            if (quant_caracter_inferior > 0)
+            if (quantidade_nomes_nao_alterados > 0)
             {              
-                foreach (var nome in nomes_com_caracteres_menor)
+                foreach (var nome in nomes_nao_alterados_menores)
                 {
                     mensagem_dialog += nome + Environment.NewLine;
                 }
@@ -259,9 +257,9 @@ namespace Renomear_Arquivos
                     "\nSendo impossível renomear um arquivo com menos de 1 caracter." +
                     "\nEsse arquivo listado abaixo não será alterado!";
 
-                if (quant_caracter_inferior > 1)
+                if (quantidade_nomes_nao_alterados > 1)
                 {
-                    aux1 = "Existem: " + quant_caracter_inferior + " Arquivos!\nCom a quantidade de caracteres inferior ao selecionado( " + textBox_quant_remover_caracteres.Text + " )" +
+                    aux1 = "Existem: " + quantidade_nomes_nao_alterados + " Arquivos!\nCom a quantidade de caracteres inferior ao selecionado( " + textBox_quant_remover_caracteres.Text + " )" +
                     "\nSendo impossível renomear um arquivo com menos de 1 caracter." +
                     "\nEsses arquivos listados abaixo não serão alterados!";
                 }
@@ -271,7 +269,7 @@ namespace Renomear_Arquivos
                 // Instancia o dialog
                 var dialog = (Form)Activator.CreateInstance(dialogTipo, new PropertyGrid());
 
-                // Populate relevant properties on the dialog instance.
+                // Preenche o dialog 
                 dialog.Text = "Observações - Importantes!";
                 dialogTipo.GetProperty("Message").SetValue(dialog, aux1, null);
                 dialogTipo.GetProperty("Details").SetValue(dialog, mensagem_dialog, null);
@@ -288,8 +286,6 @@ namespace Renomear_Arquivos
         }
 
 
-
-
         //Botão adicionar +texto ao nome do arquivo
         private void button_adicionar_Click(object sender, EventArgs e)
         {
@@ -301,37 +297,37 @@ namespace Renomear_Arquivos
             nomes_arquivos();
 
             textBox_nomes_modificados.Text = "";  
-            nomes_mod_lista.Clear();
+            nomes_modificados_lista.Clear();
 
             for (int i = 0; i < nomes_originais_lista.Count; i++)       // LOOP PELOS NOMES DA LISTA ORIGINAL
             {
-                string nome = nomes_originais_lista[i].ToString() + textBox_adicionar_caracteres.Text + extensao_originais_lista[i].ToString();
+                string nome = nomes_originais_lista[i].ToString() + textBox_adicionar_caracteres.Text + extensoes_originais_lista[i].ToString();
 
-                nomes_mod_lista.Add(nome);
-                textBox_nomes_modificados.Text += nomes_mod_lista[i] + Environment.NewLine;
+                nomes_modificados_lista.Add(nome);
+                textBox_nomes_modificados.Text += nomes_modificados_lista[i] + Environment.NewLine;
             }
         }
-
 
 
         //BOTÃO APLICAR MUDANÇAS, RENOMEIAS OS ARQUIVOS
         private void button_aplicar_mudancas_Click(object sender, EventArgs e)
         {
+
             for (int i = 0; i < nomes_originais_lista.Count; i++)
             {
-                if (!File.Exists(textBox_diretorio.Text + "\\" + nomes_mod_lista[i]))
+                if (!File.Exists(textBox_diretorio.Text + "\\" + nomes_modificados_lista[i]))
                 {
-                    File.Move(textBox_diretorio.Text + "\\" + nomes_originais_lista[i] + extensao_originais_lista[i], textBox_diretorio.Text + "\\" + nomes_mod_lista[i]);
+                    File.Move(textBox_diretorio.Text + "\\" + nomes_originais_lista[i] + extensoes_originais_lista[i], textBox_diretorio.Text + "\\" + nomes_modificados_lista[i]);
                 }
             }
 
-            if (nomes_mod_lista.Count == 1)
+            if (nomes_modificados_lista.Count == 1)
             {
                 MessageBox.Show("1 Arquivo foi renomeado no diretório:\n" + textBox_diretorio.Text);
             }
-            if (nomes_mod_lista.Count > 1)
+            if (nomes_modificados_lista.Count > 1)
             {
-                MessageBox.Show(nomes_mod_lista.Count - quant_caracter_inferior +
+                MessageBox.Show(nomes_modificados_lista.Count - quantidade_nomes_nao_alterados +
                     " Arquivos foram renomeados no diretório:\n" + textBox_diretorio.Text);
             }
         }
@@ -340,15 +336,20 @@ namespace Renomear_Arquivos
         //Botão limpar
         private void button_Limpar(object sender, EventArgs e)
         {
+            textBox_nomes_originais.Text = "";
             textBox_nomes_modificados.Text = "";
-            nomes_mod_lista.Clear();
-            nomes_com_caracteres_menor.Clear();
-            quant_caracter_inferior = 0;
-            arquivos_com_mesmo_nome = 0;
+
             textBox_diretorio.Text = "";
+
             textBox_quant_remover_caracteres.Text = "";
             textBox_adicionar_caracteres.Text = "";
             textBox_outro_formato.Text = "";
+
+            nomes_modificados_lista.Clear();
+            nomes_nao_alterados_menores.Clear();
+            quantidade_nomes_nao_alterados = 0;
+            arquivos_com_mesmo_nome = 0;
+
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

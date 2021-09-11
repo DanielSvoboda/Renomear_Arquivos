@@ -23,7 +23,7 @@ Com o objetivo de renomear vários arquivos de uma pasta conforme sua extensão:
   <br>
   <img width="150" alt="portfolio_view" src="https://raw.githubusercontent.com/DanielSvoboda/Renomear_Arquivos/main/print_0.png">
   <br>
-  Se seleciona +Mais e deixar o campo em branco é possível visualizar todos as arquivos da pasta independente da extensão(CUIDADO!)
+  Se selecionar +Mais e deixar o campo em branco é possível visualizar todos os arquivos da pasta independente da extensão(CUIDADO!)
   <br><br>
   Ambas as funções se aplicação a todos os arquivos, renomeando todos apenas apos apertar o botão "Aplicar Mudanças".
   <br>
