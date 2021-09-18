@@ -50,7 +50,7 @@ namespace Renomear_Arquivos
         public void nomes_arquivos()        //Função que busca e armazena os nomes dos arquivos
         {
             // Valida se o diretório é valido
-            if (Path.IsPathRooted(textBox_diretorio.Text) == false)                       
+            if (Directory.Exists(textBox_diretorio.Text) == false)                       
             {
                 MessageBox.Show("Escolha um diretório valido!");
                 return;
@@ -93,14 +93,16 @@ namespace Renomear_Arquivos
             {
                 if (comboBox_formatos.SelectedIndex == 12)
                 {
-                    MessageBox.Show("No local selecionado não contem arquivos com a extensão:  " + textBox_outro_formato.Text);
+                    MessageBox.Show("No local selecionado não contem arquivos com a extensão:  " + textBox_outro_formato.Text);                  
                 }
                 else
                 {
                     MessageBox.Show("No local selecionado não contem arquivos com a extensão:  " + comboBox_formatos.Text);
                 }
-                textBox_nomes_originais.Text = ""; // limpa o txtBox
+                textBox_nomes_originais.Text = "";      // limpa o txtBox da esquerda- originais
+                label_quantidade_original.Text = "0 arquivos";    // limpa texto com a quantidade de arquivos
             }
+            label_quantidade_original.Text = nomes_originais_lista.Count.ToString() + " arquivos";  // informa a quantidade de arquivos originais
         }
 
         // BOTÃO ATUALIZAR- nomes dos arquivos no diretório
@@ -160,7 +162,7 @@ namespace Renomear_Arquivos
                 {
                     if (nomes_modificados_lista.Count > 0)
                     {
-                            //função verificar se o nome final ja existe(duplicado). E faz a correção add   _1   _2   _3
+                        //função verificar se o nome final ja existe(duplicado). E faz a correção add   _1   _2   _3
                         var nome_final_renomeado = verificar_duplicado_1(nome.Remove(nome.Length - quant_remover), extensoes_originais_lista[i].ToString(), 0); // verificar_duplicado_1(string nome, string extencao, int contar_repeticao)
 
                         nomes_modificados_lista.Add(nome_final_renomeado);
@@ -341,6 +343,8 @@ namespace Renomear_Arquivos
 
             textBox_diretorio.Text = "";
 
+            label_quantidade_original.Text = "0 arquivos";
+
             textBox_quant_remover_caracteres.Text = "";
             textBox_adicionar_caracteres.Text = "";
             textBox_outro_formato.Text = "";
@@ -349,7 +353,6 @@ namespace Renomear_Arquivos
             nomes_nao_alterados_menores.Clear();
             quantidade_nomes_nao_alterados = 0;
             arquivos_com_mesmo_nome = 0;
-
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

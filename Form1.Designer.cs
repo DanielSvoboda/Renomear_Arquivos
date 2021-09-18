@@ -48,6 +48,7 @@
             this.button_adicionar = new System.Windows.Forms.Button();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label_sobre1 = new System.Windows.Forms.Label();
+            this.label_quantidade_original = new System.Windows.Forms.Label();
             this.groupBox_Formato.SuspendLayout();
             this.groupBox_Remover.SuspendLayout();
             this.groupBox_Adicionar.SuspendLayout();
@@ -203,7 +204,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(791, 386);
+            this.button3.Location = new System.Drawing.Point(792, 399);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(177, 23);
             this.button3.TabIndex = 14;
@@ -253,7 +254,7 @@
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(795, 425);
+            this.linkLabel1.Location = new System.Drawing.Point(796, 438);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(173, 13);
             this.linkLabel1.TabIndex = 16;
@@ -264,17 +265,27 @@
             // label_sobre1
             // 
             this.label_sobre1.AutoSize = true;
-            this.label_sobre1.Location = new System.Drawing.Point(811, 412);
+            this.label_sobre1.Location = new System.Drawing.Point(812, 425);
             this.label_sobre1.Name = "label_sobre1";
             this.label_sobre1.Size = new System.Drawing.Size(137, 13);
             this.label_sobre1.TabIndex = 17;
             this.label_sobre1.Text = "Criado por: Daniel Svoboda\r\n";
             // 
+            // label_quantidade_original
+            // 
+            this.label_quantidade_original.AutoSize = true;
+            this.label_quantidade_original.Location = new System.Drawing.Point(12, 441);
+            this.label_quantidade_original.Name = "label_quantidade_original";
+            this.label_quantidade_original.Size = new System.Drawing.Size(56, 13);
+            this.label_quantidade_original.TabIndex = 18;
+            this.label_quantidade_original.Text = "0 arquivos";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(989, 450);
+            this.ClientSize = new System.Drawing.Size(989, 458);
+            this.Controls.Add(this.label_quantidade_original);
             this.Controls.Add(this.label_sobre1);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.groupBox_Adicionar);
@@ -322,6 +333,7 @@
         private System.Windows.Forms.Button button_adicionar;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label label_sobre1;
+        private System.Windows.Forms.Label label_quantidade_original;
     }
 }
 
