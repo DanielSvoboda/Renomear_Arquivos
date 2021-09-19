@@ -24,6 +24,7 @@ namespace Renomear_Arquivos
 
         int arquivos_com_mesmo_nome = 0;
 
+        string aux_diretorio;                                   //recebe textBox_diretorio: evitar erros...
 
         //Escolher diretório com: WindowsAPICodePack
         private void button_diretorio_Click(object sender, EventArgs e)
@@ -61,6 +62,8 @@ namespace Renomear_Arquivos
             nomes_originais_lista.Clear();
             extensoes_originais_lista.Clear();
             nomes_modificados_lista.Clear();
+
+            aux_diretorio = textBox_diretorio.Text;
 
             DirectoryInfo directory = new DirectoryInfo(textBox_diretorio.Text);
             FileInfo[] files;
@@ -100,6 +103,7 @@ namespace Renomear_Arquivos
                     MessageBox.Show("No local selecionado não contem arquivos com a extensão:  " + comboBox_formatos.Text);
                 }
                 textBox_nomes_originais.Text = "";      // limpa o txtBox da esquerda- originais
+                textBox_nomes_modificados.Text = "";
                 label_quantidade_original.Text = "0 arquivos";    // limpa texto com a quantidade de arquivos
             }
             label_quantidade_original.Text = nomes_originais_lista.Count.ToString() + " arquivos";  // informa a quantidade de arquivos originais
@@ -142,6 +146,14 @@ namespace Renomear_Arquivos
                 MessageBox.Show("Favor, informar uma quantidade caracteres acima de 0\nPara poder remover do final do nome do arquivo!");
                 return;
             }
+
+            // Valida se o diretório é valido
+            if (Directory.Exists(textBox_diretorio.Text) == false)
+            {
+                MessageBox.Show("Escolha um diretório valido!");
+                return;
+            }
+
             nomes_arquivos();
 
             // Quantidade de caracteres que será removido no final do nome do arquivo
@@ -296,6 +308,14 @@ namespace Renomear_Arquivos
                 MessageBox.Show("Favor escrever algo no campo ao lado,\npara ser adicionado ao final do nome do arquivo!");
                 return;
             }
+
+            // Valida se o diretório é valido
+            if (Directory.Exists(textBox_diretorio.Text) == false)
+            {
+                MessageBox.Show("Escolha um diretório valido!");
+                return;
+            }
+
             nomes_arquivos();
 
             textBox_nomes_modificados.Text = "";  
@@ -314,6 +334,22 @@ namespace Renomear_Arquivos
         //BOTÃO APLICAR MUDANÇAS, RENOMEIAS OS ARQUIVOS
         private void button_aplicar_mudancas_Click(object sender, EventArgs e)
         {
+            if (aux_diretorio != textBox_diretorio.Text)
+            {
+                const string mensagem = "O campo do diretório foi alterado ! ! !\nE não é o mesmo selecionado inicialmente\n\nAperte em:\nSIM - Para corrigir automaticamente e salvar os arquivos\nOU\nNÃO - E verifique manualmente o diretório correto!";
+                var result = MessageBox.Show(mensagem, "ATENÇÃO!!!",
+                                             MessageBoxButtons.YesNo,
+                                             MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    textBox_diretorio.Text = aux_diretorio;
+                }
+                else
+                {
+                    return;
+                }
+            }
+
 
             for (int i = 0; i < nomes_originais_lista.Count; i++)
             {
@@ -342,6 +378,7 @@ namespace Renomear_Arquivos
             textBox_nomes_modificados.Text = "";
 
             textBox_diretorio.Text = "";
+            aux_diretorio = "";
 
             label_quantidade_original.Text = "0 arquivos";
 
