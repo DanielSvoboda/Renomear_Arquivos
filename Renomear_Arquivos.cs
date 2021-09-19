@@ -6,9 +6,9 @@ using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace Renomear_Arquivos
 {
-    public partial class Form1 : Form
+    public partial class Renomear_Arquivos : Form
     {
-        public Form1()
+        public Renomear_Arquivos()
         {
             InitializeComponent();
         }
@@ -61,7 +61,9 @@ namespace Renomear_Arquivos
             nomes_originais = "";
             nomes_originais_lista.Clear();
             extensoes_originais_lista.Clear();
+
             nomes_modificados_lista.Clear();
+            textBox_nomes_modificados.Text = "";
 
             aux_diretorio = textBox_diretorio.Text;
 
@@ -136,7 +138,7 @@ namespace Renomear_Arquivos
         }
 
         // Botao remover
-        private void button1_Click(object sender, EventArgs e)
+        private void button_remover_Click(object sender, EventArgs e)
         {
 
             // Verifica se o campo textBox_quant_remover_caracteres é um numero e é acima de 0
@@ -303,12 +305,24 @@ namespace Renomear_Arquivos
         //Botão adicionar +texto ao nome do arquivo
         private void button_adicionar_Click(object sender, EventArgs e)
         {
-            if (textBox_adicionar_caracteres.Text == "")
-            {
-                MessageBox.Show("Favor escrever algo no campo ao lado,\npara ser adicionado ao final do nome do arquivo!");
-                return;
-            }
+            maiusculas_minusculas_add("add");
+        }
 
+        // Botão letras MAIúSCULAS
+        private void button_maiusculas_Click(object sender, EventArgs e)
+        {
+            maiusculas_minusculas_add("maiusculas");
+        }
+
+        // Botão letras minúsculas
+        private void button_minusculas_Click(object sender, EventArgs e)
+        {
+            maiusculas_minusculas_add("minusculas");
+        }
+
+        // Função que pode realizar as 3 opções: maiusculas / minusculas / adicionar
+        public void maiusculas_minusculas_add(string opcao)
+        {
             // Valida se o diretório é valido
             if (Directory.Exists(textBox_diretorio.Text) == false)
             {
@@ -318,14 +332,27 @@ namespace Renomear_Arquivos
 
             nomes_arquivos();
 
-            textBox_nomes_modificados.Text = "";  
+            textBox_nomes_modificados.Text = "";
             nomes_modificados_lista.Clear();
 
             for (int i = 0; i < nomes_originais_lista.Count; i++)       // LOOP PELOS NOMES DA LISTA ORIGINAL
             {
-                string nome = nomes_originais_lista[i].ToString() + textBox_adicionar_caracteres.Text + extensoes_originais_lista[i].ToString();
+                string add = nomes_originais_lista[i].ToString() + textBox_adicionar_caracteres.Text + extensoes_originais_lista[i].ToString();
+                string maiusculas = nomes_originais_lista[i].ToString().ToUpper() + extensoes_originais_lista[i].ToString();
+                string minusculas = nomes_originais_lista[i].ToString().ToLower() + extensoes_originais_lista[i].ToString();
 
-                nomes_modificados_lista.Add(nome);
+                if (opcao == "add")
+                {
+                    nomes_modificados_lista.Add(add);
+                }
+                if (opcao == "maiusculas")
+                {
+                    nomes_modificados_lista.Add(maiusculas);
+                }
+                if (opcao == "minusculas")
+                {
+                    nomes_modificados_lista.Add(minusculas);
+                }
                 textBox_nomes_modificados.Text += nomes_modificados_lista[i] + Environment.NewLine;
             }
         }

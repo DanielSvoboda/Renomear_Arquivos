@@ -1,6 +1,6 @@
 ﻿namespace Renomear_Arquivos
 {
-    partial class Form1
+    partial class Renomear_Arquivos
     {
         /// <summary>
         /// Variável de designer necessária.
@@ -38,20 +38,22 @@
             this.groupBox_Formato = new System.Windows.Forms.GroupBox();
             this.button_atualizar2 = new System.Windows.Forms.Button();
             this.groupBox_Remover = new System.Windows.Forms.GroupBox();
-            this.button_aplicar_mudancas = new System.Windows.Forms.Button();
             this.textBox_quant_remover_caracteres = new System.Windows.Forms.TextBox();
             this.button_atualizar = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.button_limpar_campos = new System.Windows.Forms.Button();
             this.groupBox_Adicionar = new System.Windows.Forms.GroupBox();
-            this.button5 = new System.Windows.Forms.Button();
             this.textBox_adicionar_caracteres = new System.Windows.Forms.TextBox();
             this.button_adicionar = new System.Windows.Forms.Button();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.label_sobre1 = new System.Windows.Forms.Label();
             this.label_quantidade_original = new System.Windows.Forms.Label();
+            this.groupBox_maiusculas_minusculas = new System.Windows.Forms.GroupBox();
+            this.button_minusculas = new System.Windows.Forms.Button();
+            this.button_maiusculas = new System.Windows.Forms.Button();
+            this.button_aplicar_mudancas3 = new System.Windows.Forms.Button();
             this.groupBox_Formato.SuspendLayout();
             this.groupBox_Remover.SuspendLayout();
             this.groupBox_Adicionar.SuspendLayout();
+            this.groupBox_maiusculas_minusculas.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox_diretorio
@@ -98,7 +100,7 @@
             this.textBox_outro_formato.Enabled = false;
             this.textBox_outro_formato.Location = new System.Drawing.Point(87, 19);
             this.textBox_outro_formato.Name = "textBox_outro_formato";
-            this.textBox_outro_formato.Size = new System.Drawing.Size(50, 20);
+            this.textBox_outro_formato.Size = new System.Drawing.Size(61, 20);
             this.textBox_outro_formato.TabIndex = 5;
             this.textBox_outro_formato.Text = ".pdf";
             // 
@@ -110,7 +112,7 @@
             this.button_remover.TabIndex = 8;
             this.button_remover.Text = "REMOVER";
             this.button_remover.UseVisualStyleBackColor = true;
-            this.button_remover.Click += new System.EventHandler(this.button1_Click);
+            this.button_remover.Click += new System.EventHandler(this.button_remover_Click);
             // 
             // comboBox_formatos
             // 
@@ -143,7 +145,7 @@
             this.groupBox_Formato.Controls.Add(this.comboBox_formatos);
             this.groupBox_Formato.Location = new System.Drawing.Point(792, 12);
             this.groupBox_Formato.Name = "groupBox_Formato";
-            this.groupBox_Formato.Size = new System.Drawing.Size(177, 52);
+            this.groupBox_Formato.Size = new System.Drawing.Size(186, 52);
             this.groupBox_Formato.TabIndex = 11;
             this.groupBox_Formato.TabStop = false;
             this.groupBox_Formato.Text = "FORMATO";
@@ -153,7 +155,7 @@
             this.button_atualizar2.Enabled = false;
             this.button_atualizar2.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.button_atualizar2.Font = new System.Drawing.Font("Arial Narrow", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_atualizar2.Location = new System.Drawing.Point(143, 17);
+            this.button_atualizar2.Location = new System.Drawing.Point(154, 17);
             this.button_atualizar2.Name = "button_atualizar2";
             this.button_atualizar2.Size = new System.Drawing.Size(23, 23);
             this.button_atualizar2.TabIndex = 14;
@@ -163,31 +165,20 @@
             // 
             // groupBox_Remover
             // 
-            this.groupBox_Remover.Controls.Add(this.button_aplicar_mudancas);
             this.groupBox_Remover.Controls.Add(this.textBox_quant_remover_caracteres);
             this.groupBox_Remover.Controls.Add(this.button_remover);
-            this.groupBox_Remover.Location = new System.Drawing.Point(792, 99);
+            this.groupBox_Remover.Location = new System.Drawing.Point(792, 70);
             this.groupBox_Remover.Name = "groupBox_Remover";
-            this.groupBox_Remover.Size = new System.Drawing.Size(177, 80);
+            this.groupBox_Remover.Size = new System.Drawing.Size(186, 55);
             this.groupBox_Remover.TabIndex = 12;
             this.groupBox_Remover.TabStop = false;
             this.groupBox_Remover.Text = "REMOVER CARACTERES";
-            // 
-            // button_aplicar_mudancas
-            // 
-            this.button_aplicar_mudancas.Location = new System.Drawing.Point(6, 49);
-            this.button_aplicar_mudancas.Name = "button_aplicar_mudancas";
-            this.button_aplicar_mudancas.Size = new System.Drawing.Size(160, 23);
-            this.button_aplicar_mudancas.TabIndex = 11;
-            this.button_aplicar_mudancas.Text = "APLICAR MUDANÇAS";
-            this.button_aplicar_mudancas.UseVisualStyleBackColor = true;
-            this.button_aplicar_mudancas.Click += new System.EventHandler(this.button_aplicar_mudancas_Click);
             // 
             // textBox_quant_remover_caracteres
             // 
             this.textBox_quant_remover_caracteres.Location = new System.Drawing.Point(87, 23);
             this.textBox_quant_remover_caracteres.Name = "textBox_quant_remover_caracteres";
-            this.textBox_quant_remover_caracteres.Size = new System.Drawing.Size(79, 20);
+            this.textBox_quant_remover_caracteres.Size = new System.Drawing.Size(90, 20);
             this.textBox_quant_remover_caracteres.TabIndex = 9;
             // 
             // button_atualizar
@@ -202,43 +193,33 @@
             this.button_atualizar.UseVisualStyleBackColor = true;
             this.button_atualizar.Click += new System.EventHandler(this.button_atualizar_Click);
             // 
-            // button3
+            // button_limpar_campos
             // 
-            this.button3.Location = new System.Drawing.Point(792, 399);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(177, 23);
-            this.button3.TabIndex = 14;
-            this.button3.Text = "LIMPAR TODOS OS CAMPOS";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button_Limpar);
+            this.button_limpar_campos.Font = new System.Drawing.Font("Arial Narrow", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_limpar_campos.Location = new System.Drawing.Point(947, 407);
+            this.button_limpar_campos.Name = "button_limpar_campos";
+            this.button_limpar_campos.Size = new System.Drawing.Size(31, 31);
+            this.button_limpar_campos.TabIndex = 14;
+            this.button_limpar_campos.Text = "🗑";
+            this.button_limpar_campos.UseVisualStyleBackColor = true;
+            this.button_limpar_campos.Click += new System.EventHandler(this.button_Limpar);
             // 
             // groupBox_Adicionar
             // 
-            this.groupBox_Adicionar.Controls.Add(this.button5);
             this.groupBox_Adicionar.Controls.Add(this.textBox_adicionar_caracteres);
             this.groupBox_Adicionar.Controls.Add(this.button_adicionar);
-            this.groupBox_Adicionar.Location = new System.Drawing.Point(792, 214);
+            this.groupBox_Adicionar.Location = new System.Drawing.Point(792, 160);
             this.groupBox_Adicionar.Name = "groupBox_Adicionar";
-            this.groupBox_Adicionar.Size = new System.Drawing.Size(177, 80);
+            this.groupBox_Adicionar.Size = new System.Drawing.Size(186, 55);
             this.groupBox_Adicionar.TabIndex = 15;
             this.groupBox_Adicionar.TabStop = false;
             this.groupBox_Adicionar.Text = "ADICIONAR CARACTERES";
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(6, 48);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(160, 23);
-            this.button5.TabIndex = 12;
-            this.button5.Text = "APLICAR MUDANÇAS";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button_aplicar_mudancas_Click);
             // 
             // textBox_adicionar_caracteres
             // 
             this.textBox_adicionar_caracteres.Location = new System.Drawing.Point(87, 22);
             this.textBox_adicionar_caracteres.Name = "textBox_adicionar_caracteres";
-            this.textBox_adicionar_caracteres.Size = new System.Drawing.Size(79, 20);
+            this.textBox_adicionar_caracteres.Size = new System.Drawing.Size(90, 20);
             this.textBox_adicionar_caracteres.TabIndex = 13;
             // 
             // button_adicionar
@@ -254,22 +235,13 @@
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(796, 438);
+            this.linkLabel1.Location = new System.Drawing.Point(807, 441);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(173, 13);
             this.linkLabel1.TabIndex = 16;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "https://github.com/DanielSvoboda";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
-            // label_sobre1
-            // 
-            this.label_sobre1.AutoSize = true;
-            this.label_sobre1.Location = new System.Drawing.Point(812, 425);
-            this.label_sobre1.Name = "label_sobre1";
-            this.label_sobre1.Size = new System.Drawing.Size(137, 13);
-            this.label_sobre1.TabIndex = 17;
-            this.label_sobre1.Text = "Criado por: Daniel Svoboda\r\n";
             // 
             // label_quantidade_original
             // 
@@ -280,16 +252,59 @@
             this.label_quantidade_original.TabIndex = 18;
             this.label_quantidade_original.Text = "0 arquivos";
             // 
-            // Form1
+            // groupBox_maiusculas_minusculas
+            // 
+            this.groupBox_maiusculas_minusculas.Controls.Add(this.button_minusculas);
+            this.groupBox_maiusculas_minusculas.Controls.Add(this.button_maiusculas);
+            this.groupBox_maiusculas_minusculas.Location = new System.Drawing.Point(792, 250);
+            this.groupBox_maiusculas_minusculas.Name = "groupBox_maiusculas_minusculas";
+            this.groupBox_maiusculas_minusculas.Size = new System.Drawing.Size(186, 55);
+            this.groupBox_maiusculas_minusculas.TabIndex = 16;
+            this.groupBox_maiusculas_minusculas.TabStop = false;
+            this.groupBox_maiusculas_minusculas.Text = "MAIÚSCULAS / minúsculas";
+            // 
+            // button_minusculas
+            // 
+            this.button_minusculas.Location = new System.Drawing.Point(96, 19);
+            this.button_minusculas.Name = "button_minusculas";
+            this.button_minusculas.Size = new System.Drawing.Size(83, 23);
+            this.button_minusculas.TabIndex = 13;
+            this.button_minusculas.Text = "minúsculas";
+            this.button_minusculas.UseVisualStyleBackColor = true;
+            this.button_minusculas.Click += new System.EventHandler(this.button_minusculas_Click);
+            // 
+            // button_maiusculas
+            // 
+            this.button_maiusculas.Location = new System.Drawing.Point(6, 19);
+            this.button_maiusculas.Name = "button_maiusculas";
+            this.button_maiusculas.Size = new System.Drawing.Size(84, 23);
+            this.button_maiusculas.TabIndex = 12;
+            this.button_maiusculas.Text = "MAIÚSCULAS";
+            this.button_maiusculas.UseVisualStyleBackColor = true;
+            this.button_maiusculas.Click += new System.EventHandler(this.button_maiusculas_Click);
+            // 
+            // button_aplicar_mudancas3
+            // 
+            this.button_aplicar_mudancas3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_aplicar_mudancas3.Location = new System.Drawing.Point(792, 340);
+            this.button_aplicar_mudancas3.Name = "button_aplicar_mudancas3";
+            this.button_aplicar_mudancas3.Size = new System.Drawing.Size(186, 23);
+            this.button_aplicar_mudancas3.TabIndex = 12;
+            this.button_aplicar_mudancas3.Text = "APLICAR MUDANÇAS";
+            this.button_aplicar_mudancas3.UseVisualStyleBackColor = true;
+            this.button_aplicar_mudancas3.Click += new System.EventHandler(this.button_aplicar_mudancas_Click);
+            // 
+            // Renomear_Arquivos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(989, 458);
+            this.ClientSize = new System.Drawing.Size(992, 458);
+            this.Controls.Add(this.groupBox_maiusculas_minusculas);
+            this.Controls.Add(this.button_aplicar_mudancas3);
             this.Controls.Add(this.label_quantidade_original);
-            this.Controls.Add(this.label_sobre1);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.groupBox_Adicionar);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button_limpar_campos);
             this.Controls.Add(this.button_atualizar);
             this.Controls.Add(this.groupBox_Remover);
             this.Controls.Add(this.groupBox_Formato);
@@ -298,7 +313,7 @@
             this.Controls.Add(this.button_diretorio);
             this.Controls.Add(this.textBox_diretorio);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "Form1";
+            this.Name = "Renomear_Arquivos";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RENOMEAR ARQUIVOS";
@@ -308,6 +323,7 @@
             this.groupBox_Remover.PerformLayout();
             this.groupBox_Adicionar.ResumeLayout(false);
             this.groupBox_Adicionar.PerformLayout();
+            this.groupBox_maiusculas_minusculas.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -324,17 +340,18 @@
         private System.Windows.Forms.GroupBox groupBox_Formato;
         private System.Windows.Forms.GroupBox groupBox_Remover;
         private System.Windows.Forms.TextBox textBox_quant_remover_caracteres;
-        private System.Windows.Forms.Button button_aplicar_mudancas;
         private System.Windows.Forms.Button button_atualizar;
         private System.Windows.Forms.Button button_atualizar2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button_limpar_campos;
         private System.Windows.Forms.GroupBox groupBox_Adicionar;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.TextBox textBox_adicionar_caracteres;
         private System.Windows.Forms.Button button_adicionar;
         private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.Label label_sobre1;
         private System.Windows.Forms.Label label_quantidade_original;
+        private System.Windows.Forms.GroupBox groupBox_maiusculas_minusculas;
+        private System.Windows.Forms.Button button_minusculas;
+        private System.Windows.Forms.Button button_aplicar_mudancas3;
+        private System.Windows.Forms.Button button_maiusculas;
     }
 }
 

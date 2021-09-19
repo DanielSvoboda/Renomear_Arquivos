@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Renomear_Arquivos")]
-[assembly: AssemblyCopyright("Copyright ©  2021")]
+[assembly: AssemblyCopyright("github.com/DanielSvoboda")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

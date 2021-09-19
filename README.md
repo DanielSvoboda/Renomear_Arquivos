@@ -6,9 +6,9 @@ Programa em C# windows forms .NET Framework 4.7.2
   <br><br>
 Com o objetivo de renomear vários arquivos de uma pasta conforme sua extensão
 <br><br>
-2 Funções: Remover & Adicionar
+3 Funções: Remover & Adicionar & MAIÚSCULAS/minúsculas
 <br><br>
-  •Removendo uma quantidade de caracteres no final do nome dos arquivos
+  •Remover uma quantidade de caracteres no final do nome dos arquivos
   <br>
   Exemplo: No diretório 'C:\tmp' existem os arquivos:
   <br>
@@ -22,6 +22,9 @@ Com o objetivo de renomear vários arquivos de uma pasta conforme sua extensão
   "Daniel.pdf e Aprovação.pdf" Então adiciono a frase:" _OK " ficará: <br>
   "Daniel_OK.pdf e Aprovação_OK.pdf"
   <br><br>
+  •MAIÚSCULAS/minúsculas: altera todas as letras do nome dos arquivos
+  <br><br>
+  
   •Sendo possível selecionar uma extensão na lista, ou escrever outra não listada com a opção +Mais.
   <br>
   <img width="200" alt="portfolio_view" src="https://raw.githubusercontent.com/DanielSvoboda/Renomear_Arquivos/main/print_0.png">
@@ -48,9 +51,20 @@ Com o objetivo de renomear vários arquivos de uma pasta conforme sua extensão
   arquivoA.pdf, arquivoB.pdf, arquivoC.pdf - removendo 1 caractere ficará:  arquivo.pdf, arquivo_1.pdf, arquivo_2.pdf
   <img width="900" alt="portfolio_view" src="https://raw.githubusercontent.com/DanielSvoboda/Renomear_Arquivos/main/print_3.png">
   <br><br> 
-  •No exemplo abaixo, é possível adicionando um texto ao final do nome dos arquivos:
+
+  Exemplos
+---------  
+  •Remover uma quantidade de caracteres no final do nome dos arquivos
+  <br>
+  <img width="900" alt="portfolio_view" src="https://raw.githubusercontent.com/DanielSvoboda/Renomear_Arquivos/main/print_1.png">
+  <br><br>
+  •Adicionar um texto no final dos nome dos arquivos
   <br>
   <img width="900" alt="portfolio_view" src="https://raw.githubusercontent.com/DanielSvoboda/Renomear_Arquivos/main/print_4.png">
+  <br><br> 
+  •MAIÚSCULAS: altera todas as letras do nome dos arquivos
+  <br>
+  <img width="900" alt="portfolio_view" src="https://raw.githubusercontent.com/DanielSvoboda/Renomear_Arquivos/main/print_5.png">
   <br><br> 
   
   Dependência 
