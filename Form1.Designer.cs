@@ -297,6 +297,7 @@
             this.Controls.Add(this.textBox_nomes_originais);
             this.Controls.Add(this.button_diretorio);
             this.Controls.Add(this.textBox_diretorio);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
