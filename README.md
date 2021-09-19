@@ -1,14 +1,13 @@
 # Renomear_Arquivos
 •DOWNLOAD: https://github.com/DanielSvoboda/Renomear_Arquivos/raw/main/Renomear_Arquivos.exe
 <br><br>
+Programa em C# windows forms .NET Framework 4.7.2
   <img width="900" alt="portfolio_view" src="https://raw.githubusercontent.com/DanielSvoboda/Renomear_Arquivos/main/print_1.png">
   <br><br>
-Programa em C# windows forms .NET Framework 4.7.2
-<br><br>
 Com o objetivo de renomear vários arquivos de uma pasta conforme sua extensão
 <br><br>
 2 Funções: Remover & Adicionar
-<br>
+<br><br>
   •Removendo uma quantidade de caracteres no final do nome dos arquivos
   <br>
   Exemplo: No diretório 'C:\tmp' existem os arquivos:
@@ -33,7 +32,7 @@ Com o objetivo de renomear vários arquivos de uma pasta conforme sua extensão
   <br>
   Ao apertar em 'REMOVER' ou 'ADICIONAR' é possível pré-visualizar na lista da direita como vai ficar.
   <br>
-  Ambas as funções se aplicação apenas após apertar o botão "Aplicar Mudanças" -renomeia os arquivos.
+  Ambas as funções só alterarão os arquivos após apertar o botão "Aplicar Mudanças" que renomeia os arquivos.
   <br><br>
   
   
@@ -57,6 +56,6 @@ Com o objetivo de renomear vários arquivos de uma pasta conforme sua extensão
   Dependência 
 ---------  
   <br>
-  •Microsoft.WindowsAPICodePack-Core https://www.nuget.org/packages/Microsoft.WindowsAPICodePack-Core/1.1.0.2?_src=template
+  •Microsoft.WindowsAPICodePack-Core https://www.nuget.org/packages/Microsoft.WindowsAPICodePack-Core/1.1.0.2
   <br>
   •Costura.Fody https://www.nuget.org/packages/Costura.Fody
