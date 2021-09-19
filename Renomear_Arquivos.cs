@@ -104,11 +104,11 @@ namespace Renomear_Arquivos
                 {
                     MessageBox.Show("No local selecionado não contem arquivos com a extensão:  " + comboBox_formatos.Text);
                 }
-                textBox_nomes_originais.Text = "";      // limpa o txtBox da esquerda- originais
-                textBox_nomes_modificados.Text = "";
-                label_quantidade_original.Text = "0 arquivos";    // limpa texto com a quantidade de arquivos
+                textBox_nomes_originais.Text = "";              // limpa o txtBox da esquerda- originais
+                textBox_nomes_modificados.Text = "";            // limpa o txtBox da direita- modificados
+                label_quantidade_original.Text = "0 arquivos";  // limpa texto com a quantidade de arquivos
             }
-            label_quantidade_original.Text = nomes_originais_lista.Count.ToString() + " arquivos";  // informa a quantidade de arquivos originais
+            label_quantidade_original.Text = nomes_originais_lista.Count.ToString() + " arquivos";  // informa a quantidade de arquivos originais no canto inferior esquerdo
         }
 
         // BOTÃO ATUALIZAR- nomes dos arquivos no diretório
@@ -131,7 +131,7 @@ namespace Renomear_Arquivos
                 button_atualizar2.Enabled = false;
             }
 
-            if (Path.IsPathRooted(textBox_diretorio.Text) == true)  //se escolher algo no comboBox e o diretorio for valido, visualizar os arquivos
+            if (Directory.Exists(textBox_diretorio.Text) == true)  //se escolher algo no comboBox e o diretorio for valido, visualizar os arquivos
             {
                 nomes_arquivos();
             }
@@ -140,7 +140,6 @@ namespace Renomear_Arquivos
         // Botao remover
         private void button_remover_Click(object sender, EventArgs e)
         {
-
             // Verifica se o campo textBox_quant_remover_caracteres é um numero e é acima de 0
             bool isNumber = int.TryParse(textBox_quant_remover_caracteres.Text, out _);
             if (isNumber == false || Convert.ToInt32(textBox_quant_remover_caracteres.Text) <= 0)
@@ -177,7 +176,8 @@ namespace Renomear_Arquivos
                     if (nomes_modificados_lista.Count > 0)
                     {
                         //função verificar se o nome final ja existe(duplicado). E faz a correção add   _1   _2   _3
-                        var nome_final_renomeado = verificar_duplicado_1(nome.Remove(nome.Length - quant_remover), extensoes_originais_lista[i].ToString(), 0); // verificar_duplicado_1(string nome, string extencao, int contar_repeticao)
+                        var nome_final_renomeado = verificar_duplicado_1(nome.Remove(nome.Length - quant_remover), extensoes_originais_lista[i].ToString(), 0); 
+                        // verificar_duplicado_1(string nome, string extencao, int contar_repeticao)
 
                         nomes_modificados_lista.Add(nome_final_renomeado);
                         textBox_nomes_modificados.Text += nomes_modificados_lista[i] + Environment.NewLine; 
@@ -209,7 +209,7 @@ namespace Renomear_Arquivos
             }
         }
 
-
+        // Função que valida se o novo nome já existe (duplicado) e adiciona _1 _2 _3 no final
         private string verificar_duplicado_1(string nome, string extensao, int contar_repeticao)
         {
             var resultado = verificar_duplicado_2(nome, extensao, contar_repeticao);
@@ -259,7 +259,8 @@ namespace Renomear_Arquivos
         }
 
 
-        private void verificar_nao_modificados() //Verificar se a quantidade de caractes não ficará negativa ou =0
+        //verificar se algum arquivo não será renomeado por: ser menor que a quantidade de caracteres selecionado
+        private void verificar_nao_modificados() 
         {
             string mensagem_dialog = string.Empty;
             if (quantidade_nomes_nao_alterados > 0)
@@ -361,40 +362,45 @@ namespace Renomear_Arquivos
         //BOTÃO APLICAR MUDANÇAS, RENOMEIAS OS ARQUIVOS
         private void button_aplicar_mudancas_Click(object sender, EventArgs e)
         {
-            if (aux_diretorio != textBox_diretorio.Text)
+            if (nomes_modificados_lista.Count > 0)          // só vai prosseguir se tiver algo para ser alterado...  :)
             {
-                const string mensagem = "O campo do diretório foi alterado ! ! !\nE não é o mesmo selecionado inicialmente\n\nAperte em:\nSIM - Para corrigir automaticamente e salvar os arquivos\nOU\nNÃO - E verifique manualmente o diretório correto!";
-                var result = MessageBox.Show(mensagem, "ATENÇÃO!!!",
-                                             MessageBoxButtons.YesNo,
-                                             MessageBoxIcon.Question);
-                if (result == DialogResult.Yes)
+                if (aux_diretorio != textBox_diretorio.Text)
                 {
-                    textBox_diretorio.Text = aux_diretorio;
+                    const string mensagem = "O campo do diretório foi alterado ! ! !\nE não é o mesmo selecionado inicialmente\n\nAperte em:\nSIM - Para corrigir automaticamente e salvar os arquivos\nOU\nNÃO - E verifique manualmente o diretório correto!";
+                    var result = MessageBox.Show(mensagem, "ATENÇÃO!!!",
+                                                 MessageBoxButtons.YesNo,
+                                                 MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        textBox_diretorio.Text = aux_diretorio;
+                    }
+                    else
+                    {
+                        return;
+                    }
                 }
-                else
-                {
-                    return;
-                }
-            }
 
 
-            for (int i = 0; i < nomes_originais_lista.Count; i++)
-            {
-                if (!File.Exists(textBox_diretorio.Text + "\\" + nomes_modificados_lista[i]))
+                for (int i = 0; i < nomes_originais_lista.Count; i++)
                 {
-                    File.Move(textBox_diretorio.Text + "\\" + nomes_originais_lista[i] + extensoes_originais_lista[i], textBox_diretorio.Text + "\\" + nomes_modificados_lista[i]);
+                    if (!File.Exists(textBox_diretorio.Text + "\\" + nomes_modificados_lista[i]))
+                    {
+                        File.Move(textBox_diretorio.Text + "\\" + nomes_originais_lista[i] + extensoes_originais_lista[i], textBox_diretorio.Text + "\\" + nomes_modificados_lista[i]);
+                    }
+                }
+
+                if (nomes_modificados_lista.Count == 1)
+                {
+                    MessageBox.Show("1 Arquivo foi renomeado no diretório:\n" + textBox_diretorio.Text);
+                }
+                if (nomes_modificados_lista.Count > 1)
+                {
+                    MessageBox.Show(nomes_modificados_lista.Count - quantidade_nomes_nao_alterados +
+                        " Arquivos foram renomeados no diretório:\n" + textBox_diretorio.Text);
                 }
             }
-
-            if (nomes_modificados_lista.Count == 1)
-            {
-                MessageBox.Show("1 Arquivo foi renomeado no diretório:\n" + textBox_diretorio.Text);
-            }
-            if (nomes_modificados_lista.Count > 1)
-            {
-                MessageBox.Show(nomes_modificados_lista.Count - quantidade_nomes_nao_alterados +
-                    " Arquivos foram renomeados no diretório:\n" + textBox_diretorio.Text);
-            }
+            else
+                MessageBox.Show("Este botão vai renomear os arquivos,\nMas primeiro escolha umas das opções!");
         }
 
 
