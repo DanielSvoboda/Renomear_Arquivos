@@ -8,18 +8,18 @@ Com o objetivo de renomear vários arquivos de uma pasta conforme sua extensão
 <br><br>
 3 Funções: Remover & Adicionar & MAIÚSCULAS/minúsculas
 <br><br>
-  •Remover uma quantidade de caracteres no final do nome dos arquivos
+  •Remover uma quantidade de caracteres no início/final do nome dos arquivos
   <br>
   Exemplo: No diretório 'C:\tmp' existem os arquivos:
   <br>
-  "Daniel.pdf e Aprovação.pdf" Então removo 2 caracteres, ficará: <br>
+  "Daniel.pdf e Aprovação.pdf" Então removo 2 caracteres no final, ficará: <br>
   "Dani.pdf e Aprovaç.pdf"
   <br><br>
-  •Adicionar um texto no final dos nome dos arquivos
+  •Adicionar um texto no início/final dos nomes dos arquivos
   <br>
   Exemplo: No diretório 'C:\tmp' existem os arquivos:
   <br>
-  "Daniel.pdf e Aprovação.pdf" Então adiciono a frase:" _OK " ficará: <br>
+  "Daniel.pdf e Aprovação.pdf" Então adiciono a frase:"_OK" no final, ficará: <br>
   "Daniel_OK.pdf e Aprovação_OK.pdf"
   <br><br>
   •MAIÚSCULAS/minúsculas: altera todas as letras do nome dos arquivos
@@ -33,7 +33,7 @@ Com o objetivo de renomear vários arquivos de uma pasta conforme sua extensão
   <br><br>
    Na lista da esquerda, é possível visualizar os nomes dos arquivos do diretório escolhido.
   <br>
-  Ao apertar em 'REMOVER' ou 'ADICIONAR' é possível pré-visualizar na lista da direita como vai ficar.
+  Ao apertar em 'REMOVER' ou 'ADICIONAR' ou 'MAIÚSCULAS/minúsculas' é possível pré-visualizar na lista da direita como vai ficar.
   <br>
   Ambas as funções só alterarão os arquivos após apertar o botão "Aplicar Mudanças" que renomeia os arquivos.
   <br><br>
@@ -48,21 +48,21 @@ Com o objetivo de renomear vários arquivos de uma pasta conforme sua extensão
   <br><br>
   •Os arquivos com o nome final igual a outro já existe será renomeando com: _1   no final, se tiver vários o numero terá continuidade, Conforme o print abaixo, exemplo:
   <br>
-  arquivoA.pdf, arquivoB.pdf, arquivoC.pdf - removendo 1 caractere ficará:  arquivo.pdf, arquivo_1.pdf, arquivo_2.pdf
+  arquivoA.txt, arquivoB.txt, arquivoC.txt - removendo 1 caractere ficará:  arquivo.txt, arquivo_1.txt, arquivo_2.txt
   <img width="900" alt="portfolio_view" src="https://raw.githubusercontent.com/DanielSvoboda/Renomear_Arquivos/main/print_3.png">
   <br><br> 
 
   Exemplos
 ---------  
-  •Remover uma quantidade de caracteres no final do nome dos arquivos
+  •Remover uma quantidade de caracteres no início/final dos nomes dos arquivos
   <br>
   <img width="900" alt="portfolio_view" src="https://raw.githubusercontent.com/DanielSvoboda/Renomear_Arquivos/main/print_1.png">
   <br><br>
-  •Adicionar um texto no final dos nome dos arquivos
+  •Adicionar um texto no início/final dos nomes dos arquivos
   <br>
   <img width="900" alt="portfolio_view" src="https://raw.githubusercontent.com/DanielSvoboda/Renomear_Arquivos/main/print_4.png">
   <br><br> 
-  •MAIÚSCULAS: altera todas as letras do nome dos arquivos
+  •MAIÚSCULAS/minúsculas: altera todas as letras do nome dos arquivos
   <br>
   <img width="900" alt="portfolio_view" src="https://raw.githubusercontent.com/DanielSvoboda/Renomear_Arquivos/main/print_5.png">
   <br><br> 
